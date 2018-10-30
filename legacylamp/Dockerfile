@@ -36,4 +36,4 @@ php5.6 \
 && sudo apt-get clean
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["init", "$USER", "$PASSWORD"]
+CMD ["init"]

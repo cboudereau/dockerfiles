@@ -1,3 +1,4 @@
+# docker cli for windows : docker run -it --rm --name doc -v /var/run/docker.sock:/var/run/docker.sock docker
 # build image : docker build -t "test:latest" .
 # setup container : docker run -it --privileged --name fb test
 # exec bash : docker exec -it fb /bin/bash
@@ -6,8 +7,6 @@
 
 FROM ubuntu:16.04
 LABEL maintainer="cboudereau"
-
-COPY docker-entrypoint.sh /usr/local/bin
 
 ARG USER=dev
 ARG PASSWORD=ChangeMe
@@ -23,6 +22,8 @@ whois \
 && passwd -l root
 
 USER dev
+
+COPY docker-entrypoint.sh /usr/local/bin
 
 RUN echo $PASSWORD | sudo -S -- apt-get install -y \ 
 software-properties-common \

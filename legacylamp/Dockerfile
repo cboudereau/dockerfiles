@@ -18,8 +18,7 @@ whois \
 && echo "$PASSWORD\n$PASSWORD" | passwd root \
 && useradd -m -p $(mkpasswd -m sha-512 $PASSWORD) --home /home/$USER -g $USER -s /bin/bash $USER \
 && usermod -aG sudo $USER \
-&& echo "Etc/UTC" > /etc/timezone \
-&& passwd -l root
+&& echo "Etc/UTC" > /etc/timezone
 
 USER dev
 
@@ -33,7 +32,8 @@ dialog \
 && sudo apt-get update -y && sudo apt-get install -y \
 git \
 php5.6 \
-&& sudo apt-get clean
+&& sudo apt-get clean \
+&& sudo passwd -l root && sudo passwd -d root
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["init"]
+#ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+#CMD ["init"]

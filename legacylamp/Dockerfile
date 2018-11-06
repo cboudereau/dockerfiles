@@ -11,8 +11,8 @@ LABEL maintainer="cboudereau"
 ARG USER=dev
 ARG PASSWORD=ChangeMe
 ARG PHP_VERSION=5.6
-ARG MYSQL_ROOT_USER="root"
-ARG MYSQL_ROOT_PW="root"
+ARG MYSQL_ROOT_USER=$PASSWORD
+ARG MYSQL_ROOT_PW=$PASSWORD
 ARG MYSQL_INSTALL_VERSION=
 
 RUN apt-get update -y && apt-get install -y \
@@ -86,5 +86,5 @@ mysql-server$MYSQL_INSTALL_VERSION \
 && sudo apt-get clean \
 && sudo passwd -l root && sudo passwd -d root
 
-#ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-#CMD ["init"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["init"]

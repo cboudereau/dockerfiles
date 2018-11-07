@@ -11,7 +11,6 @@ LABEL maintainer="cboudereau"
 ARG USER=dev
 ARG PASSWORD=ChangeMe
 ARG PHP_VERSION=5.6
-ARG MYSQL_ROOT_USER=$PASSWORD
 ARG MYSQL_ROOT_PW=$PASSWORD
 ARG MYSQL_INSTALL_VERSION=
 
@@ -68,9 +67,9 @@ composer \
 mysql-common \
 libdbd-mysql-perl \
 mysql-client$MYSQL_INSTALL_VERSION \
-mysql-server$MYSQL_INSTALL_VERSION \
+mysql-server$MYSQL_INSTALL_VERSION
 # Fix MySql file permission
-&& echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R mysql /var/lib/mysql \
+RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R mysql /var/lib/mysql \
 && sudo service mysql start \
 # Apache configuration
 && sudo phpenmod mcrypt \

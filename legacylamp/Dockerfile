@@ -13,6 +13,9 @@ ARG PASSWORD=ChangeMe
 ARG PHP_VERSION=5.6
 ARG MYSQL_ROOT_PW=$PASSWORD
 ARG MYSQL_INSTALL_VERSION=
+ARG SQL_USER="dbuser"
+ARG SQL_USERREAD="dbuserread"
+ARG SQL_PASSWORD="dbpassword"
 
 RUN apt-get update -y && apt-get install -y \
 sudo \
@@ -89,6 +92,11 @@ mysql-server$MYSQL_INSTALL_VERSION
 # Fix MySql file permission
 RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R mysql /var/lib/mysql \
 && sudo service mysql start \
+# Configure default user
+&& echo "CREATE USER '${SQL_USER}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" | mysql -uroot -p$MYSQL_ROOT_PW \
+&& echo "CREATE USER '${SQL_USERREAD}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" | mysql -uroot -p$MYSQL_ROOT_PW \
+&& echo "GRANT ALL PRIVILEGES ON *.* TO '${SQL_USER}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}' WITH GRANT OPTION;" | mysql -uroot -p$MYSQL_ROOT_PW \
+&& echo "GRANT SELECT ON *.* TO '${SQL_USERREAD}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" | mysql -uroot -p$MYSQL_ROOT_PW \
 # Setup Composer 
 && sudo mkdir /home/$USER/.composer \
 # Apache configuration

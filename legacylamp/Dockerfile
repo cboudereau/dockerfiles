@@ -39,6 +39,10 @@ dialog \
 && echo "mysql-server$MYSQL_INSTALL_VERSION mysql-server/root_password_again password $MYSQL_ROOT_PW" | sudo debconf-set-selections \
 && sudo apt-get update -y && sudo apt-get install -y \
 git \ 
+vim \
+links \
+lsof \
+locales \
 # webserver packages
 apache2 \
 openssh-client \
@@ -81,9 +85,14 @@ RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R m
 && sudo usermod -a -G $USER www-data \
 && sudo usermod -a -G www-data $USER \
 && sudo service apache2 restart \
+# NodeJs
+&& curl -sL https://deb.nodesource.com/setup_8.x | sudo bash - \
+&& sudo apt install nodejs \
 # Cleaning
 && sudo apt-get clean \
-&& sudo passwd -l root && sudo passwd -d root
+&& sudo passwd -l root && sudo passwd -d root \
+# ssh folder for further ssh keys copy
+&& mkdir ~/.ssh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["init"]

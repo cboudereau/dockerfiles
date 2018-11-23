@@ -92,7 +92,7 @@ mysql-client$MYSQL_INSTALL_VERSION \
 mysql-server$MYSQL_INSTALL_VERSION
 # Fix MySql file permission
 RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R mysql /var/lib/mysql \
-&& locale-gen en_US.UTF-8 \
+&& sudo locale-gen en_US.UTF-8 \
 && sudo service mysql start \
 # Configure default user
 && echo "CREATE USER '${SQL_USER}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" | mysql -uroot -p$MYSQL_ROOT_PW \

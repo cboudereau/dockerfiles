@@ -16,6 +16,7 @@ ARG MYSQL_INSTALL_VERSION=
 ARG SQL_USER="dbuser"
 ARG SQL_USERREAD="dbuserread"
 ARG SQL_PASSWORD="dbpassword"
+ARG LANG=en_US.UTF-8
 
 RUN apt-get update -y && apt-get install -y \
 sudo \
@@ -32,6 +33,7 @@ USER dev
 COPY docker-entrypoint.sh /usr/local/bin
 
 RUN echo $PASSWORD | sudo -S -- sudo chown $USER:$USER /usr/local/bin/docker-entrypoint.sh \
+&& locale-gen en_US.UTF-8 \
 && sudo chmod +x /usr/local/bin/docker-entrypoint.sh \
 && sudo apt-get install -y \ 
 software-properties-common \

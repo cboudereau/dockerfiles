@@ -95,6 +95,8 @@ RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R m
 # upgrade dependencies
 && sudo apt-get update -y --force-yes -q \
 && sudo locale-gen en_US.UTF-8 \
+# set php mem to 512M
+&& sudo sed -i -e 's/128M/512M/g' /etc/php/5.6/apache2/php.ini \
 # sql_mode should be empty for zero date compatibility..
 && sudo sed -i '$ a sql_mode = ""' /etc/mysql/mysql.conf.d/mysqld.cnf \
 && sudo service mysql start \

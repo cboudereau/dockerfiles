@@ -10,11 +10,11 @@ if [ "$1" = 'init' ]; then
     sudo service apache2 restart > /dev/null 2>&1
     sudo service mysql restart > /dev/null 2>&1
 
-    read -s -p "Enter a new password : \n" PASSWORD
+    read -s -p "Enter a new password : " PASSWORD
     mysql -uroot -p$OLDPASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${PASSWORD}';" > /dev/null 2>&1
     echo -e "$PASSWORD\n$PASSWORD" | sudo passwd dev > /dev/null 2>&1
 
-    echo 'Start the container to finish the setup'
+    echo -e '\nStart the container to finish the setup'
     exit
 fi
 

@@ -14,8 +14,12 @@ if [ "$1" = 'init' ]; then
     mysql -uroot -p$OLDPASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${PASSWORD}';" > /dev/null 2>&1
     echo -e "$PASSWORD\n$PASSWORD" | sudo passwd dev > /dev/null 2>&1
 
-    echo -e '\nStart the container to finish the setup'
+    echo -e '\nContainer configuration finished\nYou can run bash with this command\ndocker exec -it ${HOSTNAME} /bin/bash'
     exit
 fi
+
+sudo service apache2 start
+sudo service mysql start
+sudo service supervisor start 
 
 exec "$@"

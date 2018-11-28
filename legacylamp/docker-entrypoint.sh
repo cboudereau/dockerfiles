@@ -15,8 +15,8 @@ if [ ! -f $FIRST_RUN ]; then
     mysql -uroot -p$OLDPASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${PASSWORD}';" > /dev/null 2>&1
     echo -e "$PASSWORD\n$PASSWORD" | sudo passwd dev > /dev/null 2>&1
 
-    echo -e '\nContainer configuration finished"
-    echo "You can now run this commands:'
+    echo -e '\nContainer configuration finished'
+    echo "You can now run this commands:"
     echo "docker start $HOSTNAME /bin/bash"
     echo "docker exec -it $HOSTNAME /bin/bash"
     touch $FIRST_RUN

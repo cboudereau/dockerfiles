@@ -17,7 +17,7 @@ if [ ! -f $FIRST_RUN ]; then
 
     echo -e '\nContainer configuration finished'
     echo "You can now run this commands:"
-    echo "docker start $HOSTNAME /bin/bash"
+    echo "docker start $HOSTNAME"
     echo "docker exec -it $HOSTNAME /bin/bash"
     touch $FIRST_RUN
     exit

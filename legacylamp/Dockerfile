@@ -137,4 +137,3 @@ RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R m
 && mkdir ~/.ssh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["init"]

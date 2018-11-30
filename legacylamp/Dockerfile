@@ -22,6 +22,7 @@ RUN apt-get update -y && apt-get install -y \
 sudo \
 whois \
 apt-utils \
+net-tools \
 && addgroup $USER \
 && echo "$PASSWORD\n$PASSWORD" | passwd root \
 && useradd -m -p $(mkpasswd -m sha-512 $PASSWORD) --home /home/$USER -g $USER -s /bin/bash $USER \

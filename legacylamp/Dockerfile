@@ -23,6 +23,7 @@ sudo \
 whois \
 apt-utils \
 net-tools \
+aptitude \
 && addgroup $USER \
 && echo "$PASSWORD\n$PASSWORD" | passwd root \
 && useradd -m -p $(mkpasswd -m sha-512 $PASSWORD) --home /home/$USER -g $USER -s /bin/bash $USER \
@@ -62,6 +63,9 @@ graphite-web \
 graphite-carbon \
 awscli \
 jq \
+# python
+python-software-properties \
+apt-get -y install python-pip \
 # webserver packages
 apache2 \
 openssh-client \

@@ -56,7 +56,6 @@ locales \
 # utilities
 supervisor \
 ant \
-git \
 ruby \
 bundler \
 graphite-web \
@@ -65,7 +64,7 @@ awscli \
 jq \
 # python
 python-software-properties \
-apt-get -y install python-pip \
+python-pip \
 # webserver packages
 apache2 \
 openssh-client \

@@ -117,6 +117,8 @@ RUN echo $PASSWORD | sudo -S -- chown -R mysql /var/lib/mysql && sudo chgrp -R m
 && sudo a2enmod rewrite \ 
 && sudo a2enmod xml2enc \
 && sudo a2enmod proxy \
+&& sudo a2enmod proxy_balancer \
+&& sudo a2enmod proxy_http \
 && sudo a2enmod ssl \
 && sudo usermod -a -G $USER www-data \
 && sudo usermod -a -G www-data $USER \
